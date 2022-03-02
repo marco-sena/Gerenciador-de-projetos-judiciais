@@ -1,0 +1,14 @@
+Scenario:cadastro de conta já existente
+	Given:”Adebaldo” já tem uma conta 
+	And:”Adebaldo” tenta criar uma nova conta:
+	When:”Adebaldo” envia o email “adebaldo@gmail.com”
+	And: “Adebaldo” envia o cpf”093481034-77”
+	And: “Adebaldo” envia a senha “senha123”
+	Then: Retorna a mensagem de erro dizendo”Conta ja existente”
+Scenario:Login com email certo e senha errada
+	Given:”Adebaldo” já tem uma conta 
+	And:”Adebaldo” tenta fazer o login na conta
+	When:”Adebaldo” envia o email “adebaldo@gmail.com”
+	And: “Adebaldo” envia a senha “senhaErrada123”
+	Then: Retorna a mensagem de erro dizendo”senha incorreta
+linha nova
