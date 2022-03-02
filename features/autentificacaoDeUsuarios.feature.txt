@@ -5,10 +5,33 @@ Scenario:cadastro de conta já existente
 	And: “Adebaldo” envia o cpf”093481034-77”
 	And: “Adebaldo” envia a senha “senha123”
 	Then: Retorna a mensagem de erro dizendo”Conta ja existente”
+Scenario: there are no discrepancies
+    Given I am registered as teacher “Cegusto” with password “senha1234”
+    And I have a student named “Augusto” 
+    And Augusto has 1 self-evaluated grade higher than my evaluations
+    And Augusto has 4 self-evaluated grades lower than my evaluations
+    And I have a student named “Begusto”
+    And Begusto has 5 self-evaluated grades lower than my evaluations
+    And I have a student named “Degusto”
+    And Degusto has 5 self-evaluated grades equal to my evaluations
+    When I open the “Students” page
+    Then I see there are 0 students with discrepant evaluations
+    And I see there are 0% students with discrepant evaluations
+    And I see “Augusto” on the list
+    And I see “Begusto” on the list
+    And I see “Degusto” on the list
+Scenario: Auto avaliação má sucedida
+Given:Estou na pagina de auto avaliação
+And: Vejo as notas dadas pelo meu professor
+When: Eu vou preencher minhas notas das Auto-avaliações
+And: Eu esqueço de preencher uma meta
+Then: Eu ainda estou na pagina de auto avaliação
+And: Eu recebo uma mensagem de erro por ausência de uma avaliação
+
 Scenario:Login com email certo e senha errada
 	Given:”Adebaldo” já tem uma conta 
 	And:”Adebaldo” tenta fazer o login na conta
 	When:”Adebaldo” envia o email “adebaldo@gmail.com”
 	And: “Adebaldo” envia a senha “senhaErrada123”
 	Then: Retorna a mensagem de erro dizendo”senha incorreta
-linha nova
+ 
